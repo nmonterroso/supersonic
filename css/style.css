@@ -1,0 +1,14 @@
+#container {
+	border-radius: 0;
+	padding: 0;
+	border: 0;
+}
+
+#container > ul {
+	display: none;
+}
+
+#container > div.ui-tabs-panel {
+	border: 0;
+	padding: 0;
+}

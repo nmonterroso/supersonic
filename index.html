@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>Supersonic</title>
+	<!-- required js -->
+	<script type='text/javascript' src='/js/jquery/jquery-1.8.2.min.js'></script>
+	<script type='text/javascript' src='/js/underscore-min.js'></script>
+	<script type='text/javascript' src='/js/backbone/backbone-dev.js'></script>
+
+	<script type='text/javascript' src='/js/jquery/jquery-ui-1.8.24.custom.min.js'></script>
+	<script type='text/javascript' src='/js/settings.js'></script>
+
+	<!-- models -->
+	<script type='text/javascript' src='/js/backbone/models/User.js'></script>
+
+	<!-- views -->
+	<script type='text/javascript' src='/js/backbone/views/LoginView.js'></script>
+	<script type='text/javascript' src='/js/backbone/views/MainView.js'></script>
+
+	<!-- custom objects -->
+	<script type='text/javascript' src='/js/objects/TemplateLoader.js'></script>
+	<script type='text/javascript' src='/js/objects/Subsonic.js'></script>
+
+	<!-- misc scripts -->
+	<script type='text/javascript' src='/js/globals.js'></script>
+	<script type='text/javascript' src='/js/viewswitcher.js'></script>
+
+	<!-- css -->
+	<link rel='stylesheet' href='/js/jquery/css/smoothness/jquery-ui-1.8.24.custom.css' />
+	<link rel='stylesheet' href='/css/style.css' />
+</head>
+<body>
+
+<div id='container'>
+	<ul>
+		<li><a href='#loadingView'>loading</a></li>
+		<li><a href='#loginView'>Login</a></li>
+		<li><a href='#mainView'>Main</a></li>
+	</ul>
+	<div id='loadingView'></div>
+	<div id="loginView"></div>
+	<div id="mainView"></div>
+</div>
+
+</body>
+</html>
