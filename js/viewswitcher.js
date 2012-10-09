@@ -1,11 +1,27 @@
 $(document).ready(function() {
-	var LOGIN_INDEX = 1;
-	var MAIN_INDEX = 2;
+	var views = {
+		main: {
+			index: 2,
+			name: 'main'
+		},
+		login: {
+			index: 1,
+			name: 'login'
+		}
+	};
 
-	var view = $('#container').tabs();
+	var tabs = $('#container').tabs({
+		show: function(event, ui) {
+			$.each(views, function(name, data) {
+				if (views[name].view && data.index == ui.index) {
+					views[name].view.trigger('select');
+				}
+			});
+		}
+	});
 	var onTemplatesLoaded = function(templateList) {
 		$.each(templateList, function(name, data) {
-			new data.type({
+			views[name].view = new data.type({
 				html: data.html,
 				el: $(data.el)
 			});
@@ -27,11 +43,11 @@ $(document).ready(function() {
 
 
 	user.on(User.events.AUTH_CHECK_COMPLETE, function(authorized) {
-		var index = authorized ? MAIN_INDEX : LOGIN_INDEX;
-		view.tabs('select', index);
+		var index = authorized ? views.main.index : views.login.index;
+		tabs.tabs('select', index);
 	});
 
 	if (!user.get('name')) {
-		view.tabs('select', LOGIN_INDEX);
+		tabs.tabs('select', views.login.index);
 	}
 });

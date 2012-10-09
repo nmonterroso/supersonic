@@ -10,7 +10,8 @@ var TemplateLoader = function(templateList, onComplete) {
 		return templateList;
 	};
 
-	this.work = function() {
+	this.work = function(context) {
+		context = context || null;
 		$.each(templateList, function(templateName, data) {
 			$.ajax({
 				url: data.url,
@@ -18,7 +19,11 @@ var TemplateLoader = function(templateList, onComplete) {
 					templateList[templateName].html = html;
 
 					if (++numTemplatesLoaded == numTemplatesRequired) {
-						onComplete(templateList);
+						if (context) {
+							onComplete.call(context, templateList);
+						} else {
+							onComplete(templateList);
+						}
 					}
 				}
 			});

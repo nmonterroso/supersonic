@@ -5,21 +5,22 @@ var Subsonic = function() {
 	}
 
 	this.authorize = function(user) {
-		this.api('ping.view', function(response) {
+		this.api('ping', function(response) {
 			user.trigger(User.events.AUTH_CHECK_COMPLETE, response != null);
 		}, { u: user.get('name'), p: user.get('pass') });
 	};
 
-	this.api = function(endpoint, callback, params) {
+	this.api = function(endpoint, callback, params, passthru) {
 		var data = $.extend({}, defaultParams(), params);
+		passthru = passthru || null;
 		$.ajax({
-			url: settings.url+endpoint,
+			url: settings.url+endpoint+'.view',
 			type: 'post',
 			data: data,
 			success: function(obj, stat, xhr) {
 				var response = obj['subsonic-response'];
 				if (response.status != 'ok') {
-					callback(null);
+					callback(null, passthru);
 
 					if (response.error) {
 						handleError(response.error);
@@ -30,11 +31,29 @@ var Subsonic = function() {
 						})
 					}
 				} else {
-					callback(response);
+					callback(response, passthru);
 				}
 			}
 		})
 	};
+
+	this.debug = function(endpoint, params, passthru) {
+		this.api(endpoint, function(response) {
+			console.log(response);
+		}, params, passthru);
+	};
+
+	this.stream = function(id, options) {
+		var params = $.extend({}, defaultParams(), options);
+		var baseUrl = settings.url+'stream.view?';
+
+		var queryParams = [];
+		for (var key in params) {
+			queryParams.push(key+'='+params[key]);
+		}
+
+		return baseUrl+queryParams.join('&');
+	}
 
 	var handleError = function(error) {
 		var handler = errorHandler || function(error) {

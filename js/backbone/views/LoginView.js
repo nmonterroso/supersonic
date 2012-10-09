@@ -1,17 +1,18 @@
 LoginView = Backbone.View.extend({
 	initialize: function() {
 		this.render();
+		this.on('select', this.onSelected);
 	},
 	render: function() {
 		var template = _.template(this.options.html, {});
-		$(this.el).html(template);
+		this.$el.html(template);
 
 		if (user.get('name')) {
-			$(this.el).find('#loginName').val(user.get('name'));
+			this.$el.find('#loginName').val(user.get('name'));
 		}
 
 		if (user.get('pass')) {
-			$(this.el).find('#loginPass').val(user.get('pass'));
+			this.$el.find('#loginPass').val(user.get('pass'));
 		}
 	},
 	events: {
@@ -34,5 +35,8 @@ LoginView = Backbone.View.extend({
 		user.on(User.events.AUTH_CHECK_COMPLETE, onComplete);
 		user.checkAuth(username, password);
 		event.preventDefault();
+	},
+	onSelected: function() {
+
 	}
 });
