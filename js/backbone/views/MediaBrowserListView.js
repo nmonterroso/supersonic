@@ -38,7 +38,7 @@ MediaBrowserListView = Backbone.View.extend({
 								id: child.id,
 								display: child.name,
 								isDir: true,
-								showControls: false
+								canPlay: false
 							});
 						}
 					}
@@ -62,7 +62,7 @@ MediaBrowserListView = Backbone.View.extend({
 							id: child.id,
 							display: child.title || child.album || child.artist,
 							isDir: child.isDir,
-							showControls: true
+							canPlay: true
 						});
 					}
 

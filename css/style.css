@@ -22,7 +22,7 @@ body {
 }
 
 .hidden {
-	display: none;
+	display: none !important;
 }
 
 /* selectables */
@@ -52,10 +52,14 @@ body {
 
 .ui-selectable {
 	list-style-type: none;
-	margin: 5px 10px 0 0;
+	margin: 5px 5px 0 0;
 	padding: 0;
 	float: left;
 	width: 250px;
+}
+
+.ui-selectable-helper {
+	display: none;
 }
 
 .ui-selectable li {
@@ -66,4 +70,24 @@ body {
 
 .ui-selectable li:hover {
 	cursor: pointer;
+}
+
+.mediaBrowserItemContainer {
+	display: table;
+}
+
+.mediaBrowserItemContainer > img {
+	display: table-cell;
+	vertical-align: middle;
+	margin-right: 5px;
+	width: 50px;
+}
+
+.mediaBrowserItemContainer > img.smallImage {
+	width: 25px;
+}
+
+.mediaBrowserItemContainer > div {
+	display: table-cell;
+	vertical-align: middle;
 }

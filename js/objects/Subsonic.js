@@ -43,9 +43,10 @@ var Subsonic = function() {
 		}, params, passthru);
 	};
 
-	this.stream = function(id, options) {
-		var params = $.extend({}, defaultParams(), options);
-		var baseUrl = settings.url+'stream.view?';
+	this.stream = function(id, options, endpoint) {
+		endpoint = endpoint || 'stream';
+		var params = $.extend({ id: id }, defaultParams(), options);
+		var baseUrl = settings.url+endpoint+'.view?';
 
 		var queryParams = [];
 		for (var key in params) {
