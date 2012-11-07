@@ -70,11 +70,11 @@ MediaBrowserListView = Backbone.View.extend({
 				};
 				break;
 		}
-		var busyIndicator = $('.busy', this.$el).show();
+		var busyIndicator = $('.busy', this.$el).removeClass('hidden');
 
 		subsonic.api(method, function(response, passthru) {
 			var list = $("<ol id='mediaFolderList"+listId+"' class='mediaFolderList'></ol>").insertBefore(busyIndicator);
-			busyIndicator.hide();
+			busyIndicator.addClass('hidden');
 			var items = iterator(response);
 
 			list.selectable({
